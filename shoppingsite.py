@@ -7,7 +7,7 @@ Authors: Joel Burton, Christian Fernandez, Meggie Mahnken, Katie Byers.
 """
 
 
-from flask import Flask, render_template, redirect, flash
+from flask import Flask, render_template, redirect, flash, request, session
 import jinja2
 
 import melons
@@ -89,6 +89,8 @@ def add_to_cart(melon_id):
     page and display a confirmation message: 'Melon successfully added to
     cart'."""
 
+    
+
     # TODO: Finish shopping cart functionality
 
     # The logic here should be something like:
@@ -99,8 +101,12 @@ def add_to_cart(melon_id):
     # - increment the count for that melon id by 1
     # - flash a success message
     # - redirect the user to the cart page
-
-    return "Oops! This needs to be implemented!"
+    # cart = {}
+    session['cart'] = {}
+    cart[melon_id] = cart.get(melon_id, 0) + 1
+    flash("Successfully added melon to cart!")
+    print cart
+    return render_template("cart.html")
 
 
 @app.route("/login", methods=["GET"])
