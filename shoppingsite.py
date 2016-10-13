@@ -101,8 +101,27 @@ def add_to_cart(melon_id):
     # - increment the count for that melon id by 1
     # - flash a success message
     # - redirect the user to the cart page
-    # cart = {}
-    session['cart'] = {}
+    #
+    # alternate 1:
+    # if "cart" not in session:
+    #   session['cart'] = {}
+    # no else statement.
+    # session['cart'][melon_id] = session['cart'].get(melon_id, 0) + 1
+    #
+    # alternate 2:
+    # if "cart" not in session:
+    #     cart = session['cart'] = {}
+    # else:
+    #     cart = session['cart']
+    # check to see if cart exists in session dictionary
+    # if cart doesn't exist in session dict
+    if "cart" not in session:
+        # add the key "cart" and assign it to value of empty dict
+        session["cart"] = {}
+    # if cart does exist in session dict
+    # set the variable cart equal to the value of the key "cart" in the session dictionary
+    cart = session["cart"]
+    # get the value of melon_id in the cart dictionary and increment by 1 
     cart[melon_id] = cart.get(melon_id, 0) + 1
     flash("Successfully added melon to cart!")
     print cart
